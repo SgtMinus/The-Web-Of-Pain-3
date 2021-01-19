@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Web Lab 3</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</h:head>
+
+<h:body>
+    <h:outputStylesheet name="styles2.css"/>
+    <h:outputScript name="canvas.js"/>
+    <div>
+
+    <h:form id="mainForm">
+        <div class="chooseParameter">Выберите X от -5 до 1</div>
+        <h:selectManyCheckbox id="selectedX" value="#{currentPoint.selectedX}">
+            <f:selectItems value="#{currentPoint.XValues}"/>
+        </h:selectManyCheckbox>
+
+        <div class="chooseParameter">Введите Y от -5 до 5 (не более 6 знаков)</div>
+        <p:inputText id="selectedY" value="#{currentPoint.selectedY}">
+            <f:validateLength maximum="6"/>
+            <f:validateDoubleRange minimum="-5" maximum="5"/>
+        </p:inputText>
+
+        <div class="chooseParameter">Выберите R от 1 до 5</div>
+        <h:selectOneRadio id="selectedR" value="#{currentPoint.selectedR}" onclick="drawPoints(this.value)">
+            <f:selectItems value="#{currentPoint.RValues}"/>
+        </h:selectOneRadio>
+
+        <h:inputHidden id="clickedX" value="#{currentPoint.clickedX}"/>
+        <h:inputHidden id="clickedY" value="#{currentPoint.clickedY}"/>
+
+
+        <h:commandButton id="clickFormButton" action="#{currentPoint.submitByClick}" style="display: none">
+            <f:ajax execute="clickedX clickedY selectedR" render="mainTable canvas" onevent="drawPointsWithoutR()" />
+        </h:commandButton>
+
+        <h:commandButton action="#{currentPoint.submit}" value="Нападай">
+            <f:ajax execute="selectedX selectedY selectedR" render="mainTable" onevent="drawPointsWithoutR()"/>
+        </h:commandButton>
+
+    </h:form>
+    </div>
+
+        <h:form>
+            <h:commandButton action="#{table.clearAll}" value="Очисти свой разум">
+                <f:ajax render="mainTable" onevent="drawPointsWithoutR()"/>
+            </h:commandButton>
+        </h:form>
+
+        <h:form>
+            <h:commandButton action="toIndex" value="Отступай"/>
+        </h:form>
+
+
+
+
+
+    <h:dataTable id="mainTable" value="#{table.all}" var="point">
+        <h:column>
+            <f:facet name="header">X</f:facet>
+            #{point.x}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Y</f:facet>
+            #{point.y}
+        </h:column>
+        <h:column>
+            <f:facet name="header">R</f:facet>
+            #{point.r}
+        </h:column>
+        <h:column>
+            <f:facet name="header">RESULT</f:facet>
+            #{point.res}
+        </h:column>
+    </h:dataTable>
+
+    <div >
+        <canvas id="canvas"  width="310px" height="310px"
+                onclick="clickCanvas(event)">
+        </canvas>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", drawGraph());
+        drawPoints($('input[name="mainForm:selectedR"]:checked').val());
+        setInterval(drawPointsWithoutR,500);
+    </script>
+
+</h:body>
+</html>

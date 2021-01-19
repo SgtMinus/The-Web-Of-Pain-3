@@ -1,0 +1,52 @@
+body{
+    background: #aab3b8;
+}
+
+#mainForm{
+    z-index: 70;
+    background-color: #E6E6FA;
+    border: 5px groove #000000;
+    padding: 10px 40px 40px 40px;
+    position: absolute;
+    left: 450px;
+    top:10px;
+    font-size: 25pt;
+    width: 600px;
+}
+
+
+#mainTable{
+    text-align: center;
+    width: auto;
+    z-index: 80;
+    border: 5px groove #000000;
+    background-color: #E6E6FA;
+    position: absolute;
+    left:1280px;
+    top:10px;
+    font-size: 25pt;
+    height: auto;
+    overflow-y: scroll;
+}
+
+#canvas{
+    top: 10px;
+    border: 5px groove #000000;
+}
+
+th{
+    padding: 0px 15px;
+    height: 50px;
+    width: 100px;
+}
+
+td{
+    height: 50px;
+}
+tr:hover{
+    background-color: #e8e8e8;
+}
+
+tr{
+    height: 30px;
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Web Lab 3</title>
+
+
+</h:head>
+
+
+<h:body>
+
+    <h:outputStylesheet name = "styles.css" />
+    <h1>Макаров Глеб P3210</h1>
+    <h2>Текущее время: <span id="currentTime"/></h2>
+
+    <h:form id="clock">
+    <p:clock displayMode="analog" autoSync="true" syncInterval="5000"/>
+    </h:form>
+    <div class="redirectButton" >
+    <p:button outcome="toMain" value="Let's do this!" />
+    </div>
+
+    <script type="text/javascript">
+        function getTime() {
+            let currentTime = new Date();
+            document.getElementById("currentTime").innerHTML = currentTime.toString();
+        }
+        getTime();
+        setInterval(getTime,5000);
+        
+    </script>
+</h:body>
+</html>
