@@ -12,7 +12,7 @@
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
 
-    <property name="connection.username">   * </property>
+    <property name="connection.username">   *   </property>
     <property name="connection.password"> \[T]/ </property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="show_sql">true</property>
